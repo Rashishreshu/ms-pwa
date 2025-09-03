@@ -1,23 +1,23 @@
 {
-    "name": "To-Do-List",
-    "short_name": "ToDo",
-    "start_url": "/<repository>/index.html",
-    "scope": "/<repository>/",
-    "display": "standalone",
-    "background_color": "#888888",
-    "theme_color": "#00bfff",
-    "icons": [
-        {
-            "src": "/<repository>/image.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "/<repository>/image.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any maskable"
-        }
-    ]
+  "name": "To-Do-List",
+  "short_name": "ToDo",
+  "start_url": "/ms-pwa/index.html",
+  "scope": "/ms-pwa/",
+  "display": "standalone",
+  "background_color": "#888888",
+  "theme_color": "#00bfff",
+  "icons": [
+    {
+      "src": "/ms-pwa/image.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/ms-pwa/image.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }
