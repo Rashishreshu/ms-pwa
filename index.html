@@ -1,229 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <link rel="manifest" href="/manifest.json">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do-List</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(to right, #888888, #ffffff);
-            font-family: Arial, sans-serif;
-            box-sizing: border-box;
-        }
-
-        .Main-Body {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            background-color: #888888;
-            color: white;
-            width: min(90vw, 400px);
-            min-height: 300px;
-            max-height: 80vh;
-            border-radius: 10px;
-            padding: 2rem;
-            overflow-y: auto;
-            box-sizing: border-box;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        @media (max-width: 600px) {
-            .Main-Body {
-                width: 95vw;
-                padding: 1.5rem;
-                min-height: auto;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .Main-Body {
-                padding: 1rem;
-            }
-        }
-
-        @media (max-height: 500px) {
-            .Main-Body {
-                max-height: 90vh;
-                padding: 1rem;
-            }
-        }
-
-        .Main-Body h1 {
-            margin: 0 0 1.5rem;
-            text-align: center;
-            font-size: clamp(1.5rem, 5vw, 2rem);
-        }
-
-        input {
-            margin-bottom: 1rem;
-            padding: 0.5rem;
-            border-radius: 5px;
-            border: none;
-            width: 100%;
-            box-sizing: border-box;
-            font-size: 1rem;
-        }
-
-        input:focus {
-            outline: 2px solid #00bfff;
-            outline-offset: 2px;
-        }
-
-        button {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            background-color: #00bfff;
-            color: white;
-            cursor: pointer;
-            font-size: 1rem;
-            width: 100%;
-            max-width: 200px;
-            transition: background-color 0.2s;
-        }
-
-        button:hover {
-            background-color: #009acd;
-        }
-
-        button:focus {
-            outline: 2px solid #00bfff;
-            outline-offset: 2px;
-        }
-
-        .password-list {
-            width: 100%;
-            max-height: 50vh;
-            overflow-y: auto;
-            margin-top: 1rem;
-            padding: 0;
-        }
-
-        .password-list ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .password-list li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 0.5rem 0;
-            word-break: break-all;
-            padding: 0.5rem;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-        }
-
-        .password-list button {
-            padding: 0.3rem 0.6rem;
-            font-size: 0.8rem;
-            max-width: 80px;
-        }
-
-        @media (max-width: 400px) {
-            input, button {
-                font-size: 0.9rem;
-            }
-
-            .password-list li {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-
-            .password-list button {
-                width: 100%;
-                max-width: 100%;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rashish's Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
 </head>
 
+<style>
+/* General */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #0a0a23;
+  color: white;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background: #0f0f3d;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.navbar .logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+.nav-links li {
+  margin: 0 15px;
+}
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  transition: 0.3s;
+}
+.nav-links a:hover {
+  color: #a855f7;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 100px 50px;
+  flex-wrap: wrap;
+}
+.hero-text {
+  max-width: 500px;
+}
+.hero-text h1 {
+  font-size: 45px;
+  margin-bottom: 15px;
+}
+.hero-text h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+.highlight {
+  color: #a855f7;
+}
+.buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.btn {
+  padding: 10px 20px;
+  background: #a855f7;
+  border: none;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.btn:hover {
+  background: #9333ea;
+}
+.btn.outline {
+  background: transparent;
+  border: 2px solid #a855f7;
+}
+.btn.outline:hover {
+  background: #a855f7;
+}
+.hero-img img {
+  width: 350px;
+  animation: float 3s ease-in-out infinite;
+  margin-top: 20px;
+}
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Timeline Section */
+.experience {
+  padding: 80px 20px;
+  background: #0f0f3d;
+  text-align: center;
+}
+.experience h2 {
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: auto;
+}
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background: #a855f7;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+.timeline-item {
+  padding: 20px;
+  position: relative;
+  background: #1c1c3c;
+  border-radius: 10px;
+  width: 45%;
+  margin: 20px 0;
+}
+.timeline-item.left { left: 0; }
+.timeline-item.right { left: 55%; }
+.timeline-item h3 {
+  margin-bottom: 10px;
+  color: #a855f7;
+}
+.timeline-item p {
+  font-size: 14px;
+  color: #ccc;
+}
+.timeline-item:hover {
+  transform: translateY(-10px);
+  background: #292954;
+  transition: 0.3s;
+}
+
+/* Responsive Timeline */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-text {
+    max-width: 100%;
+  }
+  .hero-text h1 {
+    font-size: 32px;
+  }
+  .hero-text h2 {
+    font-size: 20px;
+  }
+  .hero-img img {
+    width: 250px;
+  }
+
+  .timeline::after {
+    left: 20px;
+  }
+  .timeline-item {
+    width: 100%;
+    left: 0 !important;
+    padding-left: 40px;
+    text-align: left;
+  }
+}
+
+/* Footer */
+footer {
+  background: #0a0a23;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #bbb;
+}
+</style>
+
 <body>
-    <div class="Main-Body">
-        <h1>To-Do-List</h1>
-        <input type="text" id="task" placeholder="Enter your task" aria-label="Enter a new task">
-        <button type="button" onclick="storeTask()">Add Task</button>
-        <div class="password-list" id="taskList" role="list" aria-label="Task list"></div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">Rashish's Portfolio</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Journey</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-text">
+      <h1>Hi, I'm <span class="highlight">Rashish</span></h1>
+      <h2>I am a <span class="highlight typing"></span></h2>
+      <div class="buttons">
+        <a href="https://github.com/" target="_blank" class="btn outline">Visit GitHub</a>
+      </div>
     </div>
+    <div class="hero-img">
+      <img src="https://cdni.iconscout.com/illustration/premium/thumb/web-developer-3454631-2918520.png" alt="Developer">
+    </div>
+  </section>
 
-    <script>
-        function storeTask() {
-            const task = document.getElementById("task").value.trim();
-            if (!task) {
-                alert("Please enter a task");
-                return;
-            }
+  <!-- Timeline Section -->
+  <section id="experience" class="experience">
+    <h2>My 1.6 Years Journey</h2>
+    <div class="timeline">
+      <div class="timeline-item left">
+        <h3>2023 (Start)</h3>
+        <p>Python basics to advanced concepts. Built small projects and explored problem solving.</p>
+      </div>
+      <div class="timeline-item right">
+        <h3>2023 End</h3>
+        <p>Started Web Development. Learnt HTML, CSS, JS and made my first responsive websites.</p>
+      </div>
+      <div class="timeline-item left">
+        <h3>Mid 2024</h3>
+        <p>Explored Flask with Python. Created templates, small backend projects, and APIs.</p>
+      </div>
+      <div class="timeline-item right">
+        <h3>Late 2024</h3>
+        <p>Dived into Machine Learning. Practiced regression, classification, and simple models.</p>
+      </div>
+      <div class="timeline-item left">
+        <h3>2025 (Now)</h3>
+        <p>Intermediate Web Dev (deployments + responsive design). Python (lower-advanced). Offering ML + Flask services.</p>
+      </div>
+    </div>
+  </section>
 
-            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  <!-- Footer -->
+  <footer>
+    <p>Rashish's Developer Portfolio © 2025</p>
+  </footer>
 
-            // Save task with timestamp
-            tasks.push({
-                value: task,
-                timestamp: Date.now()
-            });
-
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-            document.getElementById("task").value = "";
-            showTasks();
-        }
-
-        function deleteTask(index) {
-            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-            tasks.splice(index, 1);
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-            showTasks();
-        }
-
-        function showTasks() {
-            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-            const taskList = document.getElementById("taskList");
-            taskList.innerHTML = "";
-
-            // Filter out expired tasks (older than 24h)
-            const oneDay = 24 * 60 * 60 * 1000;
-            const validTasks = tasks.filter(t => (Date.now() - t.timestamp) < oneDay);
-
-            // Update localStorage (remove expired ones)
-            localStorage.setItem("tasks", JSON.stringify(validTasks));
-
-            // Show valid tasks
-            const ul = document.createElement("ul");
-            validTasks.forEach((t, index) => {
-                const li = document.createElement("li");
-                li.setAttribute("role", "listitem");
-                li.innerHTML = `
-                    <span>${index + 1}. ${t.value}</span>
-                    <button onclick="deleteTask(${index})" aria-label="Delete task ${index + 1}">Delete</button>
-                `;
-                ul.appendChild(li);
-            });
-            taskList.appendChild(ul);
-        }
-
-        // Run on page load
-        showTasks();
-
-        if ("serviceWorker" in navigator) {
-            window.addEventListener("load", () => {
-                navigator.serviceWorker
-                    .register("/service-worker.js")
-                    .then(reg => console.log("Service Worker registered:", reg))
-                    .catch(err => console.log("Service Worker error:", err));
-            });
-        }
-    </script>
+<script>
+// Typing effect
+const typingText = document.querySelector(".typing");
+const words = ["Python Developer", "Web Developer", "ML Enthusiast", "Flask Backend Dev"];
+let wordIndex = 0, charIndex = 0, currentWord = "", isDeleting = false;
+function typeEffect() {
+  if (wordIndex >= words.length) wordIndex = 0;
+  currentWord = words[wordIndex];
+  if (!isDeleting) {
+    typingText.textContent = currentWord.substring(0, charIndex++);
+    if (charIndex > currentWord.length) {isDeleting = true; setTimeout(typeEffect, 1500); return;}
+  } else {
+    typingText.textContent = currentWord.substring(0, charIndex--);
+    if (charIndex < 0) {isDeleting = false; wordIndex++;}
+  }
+  setTimeout(typeEffect, isDeleting ? 80 : 120);
+}
+typeEffect();
+</script>
 </body>
-
 </html>
