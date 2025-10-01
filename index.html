@@ -1,11 +1,188 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Porn</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-      <h1 class="title">ahhhh babyyy </h1>
-     
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porn - Private & Ad-Free</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #333;
+            padding: 1rem;
+            text-align: center;
+        }
+        #search {
+            width: 60%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 4px;
+        }
+        #search-btn {
+            padding: 0.5rem 1rem;
+            background: #ff6b6b;
+            border: none;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+        }
+        .video-card {
+            background: #333;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .video-card:hover {
+            transform: scale(1.05);
+        }
+        .video-thumbnail {
+            width: 100%;
+            height: 150px;
+            background: #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #ccc;
+        }
+        .video-info {
+            padding: 0.5rem;
+        }
+        .video-title {
+            font-size: 0.9rem;
+            margin: 0 0 0.5rem;
+        }
+        .video-duration {
+            color: #888;
+            font-size: 0.8rem;
+        }
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+        }
+        #modal-content {
+            position: relative;
+            max-width: 80%;
+            margin: 5% auto;
+        }
+        #modal-video {
+            width: 100%;
+            height: 50vh;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+        #close-modal {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            #search { width: 80%; }
+            .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PornFrontend</h1>
+        <input type="text" id="search" placeholder="Search videos...">
+        <button id="search-btn">Search</button>
+    </header>
+
+    <div class="grid" id="video-grid">
+        <!-- Sample cards; in a real app, populate via JS/API -->
+        <div class="video-card" onclick="openModal('Hot Amateur Scene')">
+            <div class="video-thumbnail">Thumbnail Placeholder</div>
+            <div class="video-info">
+                <h3 class="video-title">Hot Amateur Scene</h3>
+                <p class="video-duration">12:34</p>
+            </div>
+        </div>
+        <div class="video-card" onclick="openModal('Busty Blonde Adventure')">
+            <div class="video-thumbnail">Thumbnail Placeholder</div>
+            <div class="video-info">
+                <h3 class="video-title">Busty Blonde Adventure</h3>
+                <p class="video-duration">8:22</p>
+            </div>
+        </div>
+        <div class="video-card" onclick="openModal('Intense BDSM Play')">
+            <div class="video-thumbnail">Thumbnail Placeholder</div>
+            <div class="video-info">
+                <h3 class="video-title">Intense BDSM Play</h3>
+                <p class="video-duration">15:01</p>
+            </div>
+        </div>
+        <!-- Add more as needed -->
+    </div>
+
+    <div id="modal">
+        <div id="modal-content">
+            <button id="close-modal" onclick="closeModal()">&times;</button>
+            <div id="modal-video">Video Player Placeholder<br>(Embed your video here)</div>
+        </div>
+    </div>
+
+    <script>
+        const searchBtn = document.getElementById('search-btn');
+        const searchInput = document.getElementById('search');
+        const grid = document.getElementById('video-grid');
+
+        searchBtn.addEventListener('click', () => {
+            const query = searchInput.value.toLowerCase();
+            // Mock filter; in real app, fetch from API
+            const cards = grid.querySelectorAll('.video-card');
+            cards.forEach(card => {
+                const title = card.querySelector('.video-title').textContent.toLowerCase();
+                card.style.display = title.includes(query) ? 'block' : 'none';
+            });
+        });
+
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') searchBtn.click();
+        });
+
+        function openModal(title) {
+            document.getElementById('modal-video').innerHTML = `Playing: ${title}<br>(Video Placeholder - Add <video> tag here)`;
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // Close modal on outside click
+        window.onclick = (e) => {
+            const modal = document.getElementById('modal');
+            if (e.target === modal) closeModal();
+        }
+    </script>
+</body>
 </html>
