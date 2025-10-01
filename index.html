@@ -20,15 +20,15 @@
             text-align: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
-        #search-container {
+        #search-container, #add-video-form {
             display: flex;
             gap: 0.5rem;
             justify-content: center;
             align-items: center;
             max-width: 800px;
-            margin: 0 auto;
+            margin: 0 auto 1rem;
         }
-        #search {
+        #search, #add-video-form input, #add-video-form select {
             flex: 1;
             padding: 0.75rem;
             font-size: 1rem;
@@ -38,7 +38,7 @@
             color: #fff;
             outline: none;
         }
-        #search-btn {
+        #search-btn, #add-video-btn {
             padding: 0.75rem 1.5rem;
             background: #ff4d4d;
             border: none;
@@ -47,7 +47,7 @@
             cursor: pointer;
             transition: background 0.3s;
         }
-        #search-btn:hover {
+        #search-btn:hover, #add-video-btn:hover {
             background: #e63939;
         }
         #category-filter {
@@ -107,6 +107,16 @@
             background: url('https://img.icons8.com/ios-filled/50/ffffff/play.png') no-repeat center;
             background-size: contain;
         }
+        .premium-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ffd700;
+            color: #000;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.75rem;
+            border-radius: 3px;
+        }
         .video-info {
             padding: 0.75rem;
         }
@@ -117,7 +127,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .video-duration, .video-category {
+        .video-duration, .video-category, .video-views {
             color: #888;
             font-size: 0.85rem;
             margin: 0;
@@ -182,8 +192,8 @@
             100% { transform: rotate(360deg); }
         }
         @media (max-width: 768px) {
-            #search-container { flex-direction: column; }
-            #search, #category-filter { width: 80%; }
+            #search-container, #add-video-form { flex-direction: column; }
+            #search, #category-filter, #add-video-form input, #add-video-form select { width: 80%; }
             .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); padding: 1rem; }
             #modal-content { max-width: 95%; }
         }
@@ -202,6 +212,18 @@
             </select>
             <button id="search-btn">Search</button>
         </div>
+        <div id="add-video-form">
+            <input type="text" id="add-title" placeholder="Video Title">
+            <input type="text" id="add-thumbnail" placeholder="Thumbnail URL">
+            <input type="text" id="add-url" placeholder="Video URL">
+            <input type="text" id="add-duration" placeholder="Duration (e.g., 12:34)">
+            <select id="add-category">
+                <option value="Amateur">Amateur</option>
+                <option value="Blonde">Blonde</option>
+                <option value="BDSM">BDSM</option>
+            </select>
+            <button id="add-video-btn">Add Video</button>
+        </div>
     </header>
 
     <div id="error-message">No videos found.</div>
@@ -219,39 +241,53 @@
         const searchBtn = document.getElementById('search-btn');
         const searchInput = document.getElementById('search');
         const categoryFilter = document.getElementById('category-filter');
+        const addVideoBtn = document.getElementById('add-video-btn');
+        const addTitle = document.getElementById('add-title');
+        const addThumbnail = document.getElementById('add-thumbnail');
+        const addUrl = document.getElementById('add-url');
+        const addDuration = document.getElementById('add-duration');
+        const addCategory = document.getElementById('add-category');
         const grid = document.getElementById('video-grid');
         const errorMessage = document.getElementById('error-message');
         const loading = document.getElementById('loading');
 
         // Mock API data (replace with your real API endpoint)
-        const mockApi = [
+        let mockApi = [
             {
                 title: "Hot Amateur Scene",
                 thumbnail: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=250&h=150",
                 duration: "12:34",
                 url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-                category: "Amateur"
+                category: "Amateur",
+                views: "1.2M",
+                isPremium: true
             },
             {
                 title: "Busty Blonde Adventure",
                 thumbnail: "https://images.unsplash.com/photo-1519125323398-675f0e0810d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=250&h=150",
                 duration: "8:22",
                 url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-                category: "Blonde"
+                category: "Blonde",
+                views: "850K",
+                isPremium: false
             },
             {
                 title: "Intense BDSM Play",
                 thumbnail: "https://images.unsplash.com/photo-1519985176271-4f1d9e4d1a1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=250&h=150",
                 duration: "15:01",
                 url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-                category: "BDSM"
+                category: "BDSM",
+                views: "2.5M",
+                isPremium: true
             },
             {
                 title: "Amateur Night Passion",
                 thumbnail: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=250&h=150",
                 duration: "10:45",
                 url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-                category: "Amateur"
+                category: "Amateur",
+                views: "500K",
+                isPremium: false
             }
         ];
 
@@ -280,10 +316,12 @@
                             <div class="thumbnail-overlay">
                                 <div class="play-icon"></div>
                             </div>
+                            ${video.isPremium ? '<div class="premium-badge">Premium</div>' : ''}
                             <div class="video-info">
                                 <h3 class="video-title">${video.title}</h3>
                                 <p class="video-duration">${video.duration}</p>
                                 <p class="video-category">${video.category}</p>
+                                <p class="video-views">${video.views} views</p>
                             </div>
                         </div>
                     `).join('');
@@ -308,6 +346,29 @@
             document.getElementById('modal').style.display = 'none';
             document.getElementById('modal-video').innerHTML = ''; // Clear video to stop playback
         }
+
+        // Add new video
+        addVideoBtn.addEventListener('click', () => {
+            const newVideo = {
+                title: addTitle.value || "New Video",
+                thumbnail: addThumbnail.value || "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=250&h=150",
+                duration: addDuration.value || "00:00",
+                url: addUrl.value || "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                category: addCategory.value,
+                views: "0",
+                isPremium: false
+            };
+            if (newVideo.title && newVideo.thumbnail && newVideo.url) {
+                mockApi.push(newVideo);
+                loadVideos(searchInput.value, categoryFilter.value);
+                addTitle.value = '';
+                addThumbnail.value = '';
+                addUrl.value = '';
+                addDuration.value = '';
+            } else {
+                alert('Please fill in title, thumbnail URL, and video URL.');
+            }
+        });
 
         // Event Listeners
         searchBtn.addEventListener('click', () => loadVideos(searchInput.value, categoryFilter.value));
