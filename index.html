@@ -253,43 +253,25 @@
 
         // Mock API data (replace with your real API endpoint)
         let mockApi = [
-            {
-                title: "Hot Amateur Scene",
-                thumbnail: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=250&h=150",
-                duration: "12:34",
-                url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-                category: "Amateur",
-                views: "1.2M",
-                isPremium: true
-            },
-            {
-                title: "Busty Blonde Adventure",
-                thumbnail: "https://images.unsplash.com/photo-1519125323398-675f0e0810d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=250&h=150",
-                duration: "8:22",
-                url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-                category: "Blonde",
-                views: "850K",
-                isPremium: false
-            },
-            {
-                title: "Intense BDSM Play",
-                thumbnail: "https://images.unsplash.com/photo-1519985176271-4f1d9e4d1a1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=250&h=150",
-                duration: "15:01",
-                url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-                category: "BDSM",
-                views: "2.5M",
-                isPremium: true
-            },
-            {
-                title: "Amateur Night Passion",
-                thumbnail: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=250&h=150",
-                duration: "10:45",
-                url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-                category: "Amateur",
-                views: "500K",
-                isPremium: false
-            }
-        ];
+    {
+        title: "Real Pornhub Scene",
+        thumbnail: "https://ei.phncdn.com/videos/202000/202000/original/(thumb).jpg", // Supply a real Pornhub video thumbnail URL
+        duration: "14:32",
+        embedCode: `<iframe src="https://www.pornhub.com/embed/123456" frameborder="0" width="100%" height="250" allowfullscreen></iframe>`,
+        category: "Amateur",
+        views: "2.4M",
+        isPremium: true
+    },
+    {
+        title: "XNXX Wild Adventure",
+        thumbnail: "https://img-hw.xnxx-cdn.com/videos/0/0/0/0/0/0/000000_thumb_8.jpg", // Supply a real XNXX or other tube thumbnail URL
+        duration: "10:17",
+        embedCode: `<iframe src="https://www.xnxx.com/video-embed/abcdef" frameborder="0" width="100%" height="250" allowfullscreen></iframe>`,
+        category: "Blonde",
+        views: "1.1M",
+        isPremium: false
+    }
+];
 
         async function loadVideos(query = '', category = '') {
             try {
@@ -385,3 +367,4 @@
     </script>
 </body>
 </html>
+
