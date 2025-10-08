@@ -1,1 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ask-Astro Login</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f3ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .login-container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 300px;
+    }
+    .login-container h1 {
+        color: #8b572a;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    .login-container p {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+    .login-container input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+    .login-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #8b572a;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-bottom: 20px;
+    }
+    .login-container button:hover {
+        background-color: #a66b3f;
+    }
+    .divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+    }
+    .divider hr {
+        flex: 1;
+        border: none;
+        border-top: 1px solid #ddd;
+    }
+    .divider span {
+        margin: 0 10px;
+        color: #666;
+        font-size: 14px;
+    }
+    .social-login button {
+        width: 100%;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    .social-login button img {
+        width: 20px;
+        margin-right: 10px;
+    }
+    .terms {
+        font-size: 12px;
+        color: #666;
+        margin-top: 20px;
+    }
+    .terms a {
+        color: #8b572a;
+        text-decoration: none;
+    }
+    .toggle-auth {
+        color: #8b572a;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1 id="authTitle">Login to Ask-Astro</h1>
+    <p id="authSubtitle">Access your astrology consultations</p>
+    <input type="email" id="email" placeholder="Email" aria-label="Email" />
+    <input type="password" id="password" placeholder="Password" aria-label="Password" />
+    <button id="authButton">Login</button>
+    <p class="toggle-auth" id="toggleAuth">Don't have an account? Sign Up</p>
+    <div class="divider">
+      <hr /><span>OR</span><hr />
+    </div>
+    <div class="social-login">
+      <button id="googleLogin">
+        <img src="https://www.google.com/favicon.ico" alt="Google Icon" />
+        Continue with Google
+      </button>
+    </div>
+    <p class="terms">
+      By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+    </p>
+  </div>
+
+  <script>
+    const authTitle = document.getElementById('authTitle');
+    const authSubtitle = document.getElementById('authSubtitle');
+    const authButton = document.getElementById('authButton');
+    const toggleAuth = document.getElementById('toggleAuth');
+    let isLogin = true;
+
+    toggleAuth.addEventListener('click', () => {
+      isLogin = !isLogin;
+      authTitle.textContent = isLogin ? 'Login to Ask-Astro' : 'Sign Up for Ask-Astro';
+      authSubtitle.textContent = isLogin ? 'Access your astrology consultations' : 'Create an account to start your journey';
+      authButton.textContent = isLogin ? 'Login' : 'Sign Up';
+      toggleAuth.textContent = isLogin ? "Don't have an account? Sign Up" : 'Already have an account? Login';
+    });
+
+    // On click, show message
+    authButton.addEventListener('click', () => {
+      alert('Hey! 👋 Fuck you');
+    });
+
+    // Google login placeholder
+    document.getElementById('googleLogin').addEventListener('click', () => {
+      alert('Google login clicked!');
+    });
+  </script>
+</body>
+</html>
+
 
